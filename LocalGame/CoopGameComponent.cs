@@ -186,8 +186,8 @@ namespace SIT.Coop.Core.LocalGame
                     , () => 1f
 					, () => 1f
 					, 0
-					, new GClass1478()
-					, GClass1206.Default
+					, new GClass1480()
+					, GClass1208.Default
 					, null
 					, false);
 				return localPlayer;
