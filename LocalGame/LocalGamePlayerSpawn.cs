@@ -59,7 +59,7 @@ namespace SIT.Coop.Core.LocalGame
             , Task<EFT.LocalPlayer> __result
             )
         {
-            //Logger.LogInfo($"LocalGamePlayerSpawn:PatchPostfix");
+            Logger.LogInfo($"LocalGamePlayerSpawn:PatchPostfix");
 
             await __result.ContinueWith((x) =>
             {
@@ -83,7 +83,9 @@ namespace SIT.Coop.Core.LocalGame
                 coopGameComponent = gameWorld.GetOrAddComponent<CoopGameComponent>();
                 CoopGameComponent.Players.Clear();
                 // TODO: Shouldnt this be a member variable, not static?
+                Logger.LogInfo("[COOP] Players cleared");
                 CoopGameComponent.Players.TryAdd(PatchConstants.GetPlayerProfileAccountId(profile), p);
+                Logger.LogInfo("[COOP] Players added? " + CoopGameComponent.Players.Count);
                 var prc = p.GetOrAddComponent<PlayerReplicatedComponent>();
                 prc.player = p;
 

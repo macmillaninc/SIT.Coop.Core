@@ -29,7 +29,7 @@ namespace SIT.Coop.Core.LocalGame
 		void Awake()
 		{
 			PatchConstants.Logger.LogInfo("CoopGameComponent:Awake");
-			Players.Clear();
+			//Players.Clear();
 
 			if (PoolManagerType == null)
 			{
@@ -209,7 +209,6 @@ namespace SIT.Coop.Core.LocalGame
 
 		public static ConcurrentDictionary<EFT.LocalPlayer, Dictionary<string, object>> ServerReliablePackets { get; } 
 			= new ConcurrentDictionary<EFT.LocalPlayer, Dictionary<string, object>>();
-
 
 		void RunQueuedActions()
 		{
@@ -443,6 +442,7 @@ namespace SIT.Coop.Core.LocalGame
 								//{
 								//	QuickLog(string.Join(", ", item.Keys));
 								//}
+								
 								foreach (var item in returnedPlayers)
 								{
 									if (item == null)
@@ -450,16 +450,26 @@ namespace SIT.Coop.Core.LocalGame
 
 									if (item.ContainsKey("accountId"))
 									{
+										PatchConstants.Logger.LogInfo("[COOP] sp item: " + item["sP"].ToString());
 										string accountId = item["accountId"].ToString();
 										if (Players == null || Players.Count == 0)
+                                        {
+											PatchConstants.Logger.LogInfo("[COOP] Player=null, p.c = 0");
 											continue;
+										}
+
 
 										if (OldPlayers.ContainsKey(accountId))
+										{
+											PatchConstants.Logger.LogInfo("[COOP] Item has accountId ");
 											continue;
+										}
+											
 
 										Vector3 newPosition = Players.First().Value.Position;
 										if (item.ContainsKey("sPx") && item.ContainsKey("sPy") && item.ContainsKey("sPz"))
 										{
+											PatchConstants.Logger.LogInfo("[COOP] has spx,spy,spz ");
 											string npxString = item["sPx"].ToString();
 											newPosition.x = float.Parse(npxString);
 											string npyString = item["sPy"].ToString();
@@ -469,6 +479,21 @@ namespace SIT.Coop.Core.LocalGame
 
 											//QuickLog("New Position found for Spawning Player");
 										}
+										if (item.ContainsKey("sP"))
+										{
+											var x = item["sP"];
+											var xy = x["x"];
+											PatchConstants.Logger.LogInfo("[COOP] has sp ");
+											string npxString = item["sP"]["x"].ToString();
+											newPosition.x = float.Parse(npxString);
+											string npyString = item["sPy"].ToString();
+											newPosition.y = float.Parse(npyString);
+											string npzString = item["sPz"].ToString();
+											newPosition.z = float.Parse(npzString);
+
+											//QuickLog("New Position found for Spawning Player");
+										}
+
 										this.DataReceivedClient_PlayerBotSpawn(item, accountId, item["profileId"].ToString(), newPosition, false);
 									}
 									else
@@ -641,7 +666,7 @@ namespace SIT.Coop.Core.LocalGame
 		void QuickLog(string log)
 		{
 			//if(logSource == null)
-			//	logSource = new BepInEx.Logging.ManualLogSource("CoopGameComponent");
+				//logSource = new BepInEx.Logging.ManualLogSource("CoopGameComponent");
 
 			//logSource.LogInfo(log);
 			PatchConstants.Logger.LogInfo(log);

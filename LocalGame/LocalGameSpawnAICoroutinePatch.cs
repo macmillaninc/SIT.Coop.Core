@@ -95,7 +95,7 @@ namespace SIT.Coop.Core.LocalGame
                     , BotSystemHelpers.RoleLimitDifficultyType.Name + "_0"
                     , false);
                 // TODO: Make this not directly go for GClass1036_0
-                var openZones = PatchConstants.GetFieldOrPropertyFromInstance<object>(LocalGamePatches.LocalGameInstance, "GClass1036_0", false);
+                var openZones = PatchConstants.GetFieldOrPropertyFromInstance<object>(LocalGamePatches.LocalGameInstance, "GClass1038_0", false);
                 var openZones2 = PatchConstants.GetFieldOrPropertyFromInstance<string>(openZones, "OpenZones", false);
 
                 // Construct Profile Creator
