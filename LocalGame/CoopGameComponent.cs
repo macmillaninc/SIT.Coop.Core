@@ -181,13 +181,12 @@ namespace SIT.Coop.Core.LocalGame
 					, EUpdateQueue.Update //PatchConstants.GetAllPropertiesForObject(LocalGameInstance).FirstOrDefault(x=>x.Name == "UpdateQueue").GetValue(LocalGameInstance)
 					, armsUpdateMode
 					, bodyUpdateMode
-                    , GClass523.Config.CharacterController.ClientPlayerMode // TODO: Make this dynamic/reflected
+                    , GClass541.Config.CharacterController.ClientPlayerMode // TODO: Make this dynamic/reflected
                     //, CharacterControllerMode
                     , () => 1f
 					, () => 1f
-					, 0
-					, new GClass1480()
-					, GClass1208.Default
+					, new GClass1547()
+					, GClass1268.Default
 					, null
 					, false);
 				return localPlayer;
@@ -482,9 +481,9 @@ namespace SIT.Coop.Core.LocalGame
 										if (item.ContainsKey("sP"))
 										{
 											var x = item["sP"];
-											var xy = x["x"];
+											//var xy = x["x"];
 											PatchConstants.Logger.LogInfo("[COOP] has sp ");
-											string npxString = item["sP"]["x"].ToString();
+											string npxString = item["sPx"].ToString();
 											newPosition.x = float.Parse(npxString);
 											string npyString = item["sPy"].ToString();
 											newPosition.y = float.Parse(npyString);
@@ -520,6 +519,7 @@ namespace SIT.Coop.Core.LocalGame
 			{
 				QuickLog("ParityCheckHandleReturn ERROR");
 				QuickLog(ex.ToString());
+				QuickLog(ex.Message);
 			}
 		}
 
