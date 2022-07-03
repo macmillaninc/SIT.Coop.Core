@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using static EFT.UI.Matchmaker.MatchMakerAcceptScreen;
 //using ScreenController = EFT.UI.Matchmaker.MatchMakerAcceptScreen.GClass2426;
 using Grouping = GClass2434;
-using SIT.Coop.Core.Matchmaker.MatchmakerAccept;
 using System.Reflection;
 using Newtonsoft.Json;
 using SIT.Coop.Core.Matchmaker.MatchmakerAccept;
